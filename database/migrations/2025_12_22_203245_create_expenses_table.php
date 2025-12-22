@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('group_id');
+            $table->unsignedBigInteger('group_id');
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
-            $table->bigInteger('paid_by');
+            $table->unsignedBigInteger('paid_by');
             $table->foreign('paid_by')->references('id')->on('users')->onDelete('cascade');
             $table->decimal('amount', 10, 2);
             $table->string('description');

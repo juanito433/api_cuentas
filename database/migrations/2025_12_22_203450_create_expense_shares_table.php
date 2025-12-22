@@ -14,9 +14,9 @@ return new class extends Migration
         /* Quiénes consumieron/deben */
         Schema::create('expense_shares', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('expense_id');
+            $table->unsignedBigInteger('expense_id');
             $table->foreign('expense_id')->references('id')->on('expenses')->onDelete('cascade');
-            $table->bigInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->decimal('owed_amount', 10, 2);
             $table->timestamps();
