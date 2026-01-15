@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -36,18 +38,20 @@ class AuthController extends Controller
         return response()->json($response, 201);
     }
 
-    /* Consultar usuario */
-    public function getUser ($id){
-        $id_user = User::find($id);
-
-        if (!$id_user){
+    /* Eliminar usuario */
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
             return response()->json([
-                'message' => 'usuario no encontrado'], 
-                404);
+                'menssage' => 'Usuario no encontrado',
+                'status' => 404,
+            ], 404);
         }
+        $user->delete();
         return response()->json([
-            'user' => $id_user
+            'message' => 'Usuario eliminado correctamente',
+            'status' => 200,
         ], 200);
-
     }
 }
